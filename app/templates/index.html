@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Time granular</title>
+    <link href='{{ url_for("static", filename="styles/bootstrap.min.css") }}' rel='stylesheet'>
+    <link href='{{ url_for("static", filename="styles/style.css") }}' rel='stylesheet'>
+  </head>
+  <body>
+    <header class='header-main'>
+      <nav class='navbar navbar-static-top top-menu'>
+        <div class='containter-fluid'>
+          <div class='navbar-header'>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class='navbar-brand' href='#'>Time granular</a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#"><span class='glyphicon glyphicon-calendar' aria-hidden="true"></span></a></li>
+              <li><a href="#"><span class='glyphicon glyphicon-plus-sign' aria-hidden="true"></span></a></li>
+              <li><a href="#"><span class='glyphicon glyphicon-user' aria-hidden="true"></span></a></li>
+              <li><a href="#"><span class='glyphicon glyphicon-log-out' aria-hidden="true"></span></a></li>
+            </ul>
+          </div>
+        </div>  <!--containter-fluid-->
+      </nav>
+    </header>
+
+    <div class='container-fluid main-contents'>
+      <div class='row'>
+        <div class='col-sm-9' id='timetable'>
+          <div class='days-row'></div>
+          <div class='timetable-scroll'>
+            <div class='time-column'></div>
+            <div class='day-columns'></div>
+          </div>
+        </div>
+        <div class='col-sm-3' id='message-box'></div>
+      </div>
+    </div>
+
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
+    <script src='{{ url_for("static", filename="scripts/get-scroll-width.js") }}'></script>
+    <script src='{{ url_for("static", filename="scripts/timetable.js") }}'></script>
+    <script src='{{ url_for("static", filename="scripts/bootstrap.min.js") }}'></script>
+  </body>
+<html>
