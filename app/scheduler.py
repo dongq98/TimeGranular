@@ -38,27 +38,34 @@ class Main_schedule:
         
     def __len__(self):
         return self._maxid
+
+    def find(self,schedulename):
+        return self[schedulename]
         
-    def addschedule(self,member, start, end):
+    def addschedule(self,schedulename,member, start, end, suitable):
         validate(start),validate(end)
         assert start - datetime.now() > timedelta(0) and end - start > timedelta(0)
         newschedule = dict()
+        newschedule['name'] = schedulename
         newschedule['member'] = member
         newschedule['start'] = roundTime(start)
         newschedule['end'] = roundTime(end)
+        newschedule['startrange'] = startrange
+        newschedule['endrange'] = endrange
+        newschedule['suitable'] = suitable
         self._schtable.add(self._maxid,newschedule)
         self._maxid += 1
                 
                 
-    def searchbesttime(self,member, duration, endrange, startrange=roundTime()):
+    def searchbesttime(self,schedulename, member, duration, endrange, startrange=roundTime()):
         counter = Heap()
-        for i in range(len(self)):
+        for i in self._schtable:
             cur = 0
-            for j in self._schtable[i]['member']:                
+            for j in i['member']:                
                 if j in member:
                     cur += 1
-            counter.add(self._schtable[i]['start'],cur)
-            counter.add(self._schtable[i]['end'],-cur)
+            counter.add(i['start'],cur)
+            counter.add(i['end'],-cur)
         base = 0
         listvar=[]
         localmin=[]
@@ -76,4 +83,30 @@ class Main_schedule:
         for i in range(1,len(listvar)-1):
             if listvar[i-1][0]-listvar[i][0] >=0 and listvar[i][0]-listvar[i+1][0]<=0:
                 localmin.append(listvar[i])
-        return sorted(localmin, key=itemgetter(1))
+        suitable = sorted(localmin, key=itemgetter(1))
+        return (suitable, schedulename, member, duration, startrange, endrange)
+
+
+    def editdetail(self,schedulename,member=None,duration=None,endrange=None, startrange=None):
+        if member == None and duration == None and endrange == None and startrange == None:
+            for i in range(len(self)):
+                if schedulename == self._schtable[i]['name']:
+                    return self._schtable[i]['suitable']
+        else:
+            for i in range(len(self)):
+                if schedulename == self._schtable[i]['name']:
+                    if member == None:
+                        member = self._schtable[i]['member']
+                    if duration == None:
+                        duration = self._schtable[i]['end']-self._schtable[i]['start']
+                    if endrange == None:
+                        member = self._schtable[i]['endrange']
+                    if startrange == None:
+                        member = self._schtable[i]['startrange']
+                    self.searchbesttime(schedulename, member, duration,endrange, startrange)
+    def viewpersonal(self, person):
+        schlist = []
+        for i in range(len(self)):
+            if person in self._schtable[i]['member']:
+                schlist.append(self._schtable[i])
+        return schlist
