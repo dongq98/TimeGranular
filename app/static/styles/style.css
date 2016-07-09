@@ -17,8 +17,7 @@
 /* title */
 
 .top-menu .navbar-brand {
-  background-color: #C1F464;
-  color: #FF6B6B;
+  color: #FFFFFF;
   font-weight: bold;
 }
 
@@ -30,12 +29,7 @@
 
 /* mobile menu */
 
-.top-menu li>a {
-  color: #44B3AB;
-}
-
 .top-menu .navbar-collapse {
-  background-color: #C1F464;
   font-size: 20;
 }
 
@@ -71,8 +65,10 @@
   margin-bottom: 0px;
 }
 
-.navbar-right {
-  margin-right: 15px;
+@media (min-width: 768px) {
+  .navbar-right {
+    margin-right: 15px;
+  }
 }
 
 /****** main contents ******/
@@ -120,7 +116,7 @@
   height: 100%;
 }
 
-/* hide message box on mobiles */
+/* hide message box on mobile */
 
 @media (max-width: 767px) {
   #message-box {

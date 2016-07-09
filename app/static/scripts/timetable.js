@@ -36,7 +36,7 @@ function initialize() {
 			var columnDeco = document.createElement('div')
 			columnDeco.style.position = 'absolute'
 			columnDeco.style.left = (tableWidth-scrollWidth) / 8 * (d+1)
-			columnDeco.style.width = (tableWidth-scrollWidth) / 8 - 2
+			columnDeco.style.width = (tableWidth-scrollWidth) / 8
 			columnDeco.style.height = tableHeight
 			columnDeco.style.backgroundColor = '#FAF0DF'
 			dayColumns.append(columnDeco)
